@@ -1,32 +1,53 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
-    margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  margin: 0;
 }
 
 header {
-    font-size: 2rem;
-    font-weight: 900;
-    text-align: center;
-    padding: 2rem;
-    border-bottom: solid 2px;
+  font-size: 2rem;
+  font-weight: 900;
+  text-align: center;
+  padding: 2rem;
+  border-bottom: solid 2px;
 }
 
-
 .score-board {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 1rem 0;
-    width: 100%;
-    max-width: 20vw;
-    padding-top: 3rem;
-    margin: auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1rem 0;
+  width: 100%;
+  max-width: 295px;
+  margin: 10px auto;
 }
 
 .score-board-letter {
-    display: flex;
-    box-sizing: border-box;
-    height: 3rem;
-    width: 3rem;
-    border: 3px solid #6f6f6fa0;
-    font-size: 1rem;
-    margin: 0;
+  display: flex;
+  height: 3rem;
+  width: 3rem;
+  border: 3px solid #6f6f6fa0;
+  font-size: 2.5rem;
+  font-weight: 500;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+
+.wrong {
+    background-color: grey;
+    color: white;
+}
+
+.close {
+    background-color:coral;
+    color: white;
+}
+
+.correct {
+    background-color: rgb(110, 195, 110);
+    color: white
 }

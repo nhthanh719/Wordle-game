@@ -25,13 +25,19 @@ const init = async() => {
     currentGuess = '';
   }
 
+  const backspace = () => {
+    // remove last letter from current guess
+    currentGuess = currentGuess.slice(0, currentGuess.length - 1);
+    letters[ANSWER_LENGTH * currentRow + currentGuess.length].innerText = '';
+  }
+
   document.addEventListener('keydown', function handleKeyPress(event) {
     const action = event.key;
 
     if (action === 'Enter') {
-      submit(); // TODO: create submit function
+      submit();
     } else if (action === 'Backspace') {
-      erase(); // TODO: create erase function
+      backspace();
     } else if (isLetter(action)) { 
       addLetter(action.toUpperCase());
     } else {

@@ -5,6 +5,8 @@ const ANSWER_LENGTH = 5;
 const init = async() => {
   let currentGuess = '';
   let currentRow = 0;
+  setLoading(false);
+
   const addLetter = (letter) => {
     if (currentGuess.length < ANSWER_LENGTH) {
       // add letter to the end
@@ -48,6 +50,10 @@ const init = async() => {
 
 const isLetter = (letter) => {
   return /^[a-zA-Z]$/.test(letter);
+const setLoading = (isLoading) => {
+  loadingDiv.classList.toggle('show', isLoading);
+}
+
 }
 
 init();

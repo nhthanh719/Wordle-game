@@ -5,6 +5,12 @@ const ANSWER_LENGTH = 5;
 const init = async() => {
   let currentGuess = '';
   let currentRow = 0;
+
+  //get the word of the day
+  const res = await fetch("https://words.dev-apis.com/word-of-the-day");
+  const resObj = await res.json();
+  const word = resObj.word.toUpperCase();
+
   setLoading(false);
 
   const addLetter = (letter) => {
@@ -50,10 +56,10 @@ const init = async() => {
 
 const isLetter = (letter) => {
   return /^[a-zA-Z]$/.test(letter);
-const setLoading = (isLoading) => {
-  loadingDiv.classList.toggle('show', isLoading);
 }
 
+const setLoading = (isLoading) => {
+  loadingDiv.classList.toggle('show', isLoading);
 }
 
 init();

@@ -73,6 +73,11 @@ header {
   right: 49%;
   font-size: 30px;
   animation: scale 1.5s linear infinite;
+  visibility: hidden;
+}
+
+.show {
+  visibility: visible;
 }
 
 @keyframes scale {

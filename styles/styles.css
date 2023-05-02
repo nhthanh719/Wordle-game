@@ -13,7 +13,6 @@ header {
   font-weight: 900;
   text-align: center;
   padding: 2rem;
-  border-bottom: solid 2px;
 }
 
 .score-board {
@@ -24,6 +23,7 @@ header {
   max-width: 295px;
   margin: 10px auto;
   padding-top: 5rem;
+  border-top: solid 2px;
 }
 
 .score-board-letter {
@@ -92,3 +92,27 @@ header {
 .hidden {
   visibility: hidden;
 }
+
+.winner {
+  animation: color-cycle 0.1s linear infinite;
+  z-index: 2;
+}
+
+@keyframes color-cycle {
+  0% {
+    color: #f94144; /* red */
+  }
+  25% {
+    color: #f3722c; /* orange */
+  }
+  50% {
+    color: #f8961e; /* yellow */
+  }
+  75% {
+    color: #90be6d; /* green */
+  }
+  100% {
+    color: #43aa8b; /* teal */
+  }
+}
+

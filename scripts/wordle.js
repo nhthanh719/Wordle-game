@@ -13,12 +13,16 @@ const init = async() => {
       submit(); // TODO: create submit function
     } else if (action === 'Backspace') {
       erase(); // TODO: create erase function
-    } else if (isLetter(action)) { // TODO: create isLetter function
+    } else if (isLetter(action)) { 
       addLetter(action.toUpperCase()); // TODO: create addLetter function
     } else {
       // do nothing
     }
   })
+}
+
+const isLetter = (letter) => {
+  return /^[a-zA-Z]$/.test(letter);
 }
 
 init();

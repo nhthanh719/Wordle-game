@@ -1,3 +1,24 @@
-//Get innerHTML of each score-board-letter
-//When pressing a letter button, the letter will be placed into the HTML places (pass the keys which are not letters)
-//When enter all 5 letters in a row, press Enter to valiate the work and return the result
+const letter = document.querySelectorAll('.score-board-letter');
+const loadingDiv = document.querySelector('.loader');
+
+const init = async() => {
+  
+
+
+
+  document.addEventListener('keydown', function handleKeyPress(event) {
+    const action = event.key;
+
+    if (action === 'Enter') {
+      submit(); // TODO: create submit function
+    } else if (action === 'Backspace') {
+      erase(); // TODO: create erase function
+    } else if (isLetter(action)) { // TODO: create isLetter function
+      addLetter(action.toUpperCase()); // TODO: create addLetter function
+    } else {
+      // do nothing
+    }
+  })
+}
+
+init();

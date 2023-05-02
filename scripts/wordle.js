@@ -1,9 +1,18 @@
-const letter = document.querySelectorAll('.score-board-letter');
+const letters = document.querySelectorAll('.score-board-letter');
 const loadingDiv = document.querySelector('.loader');
+const ANSWER_LENGTH = 5;
 
 const init = async() => {
+  let currentGuess = '';
   
-
+  const addLetter = (letter) => {
+    if (currentGuess.length < ANSWER_LENGTH) {
+      currentGuess += letter;
+    } else {
+      currentGuess = currentGuess.substring(0, currentGuess.length - 1) + letter;
+    }
+    letters[currentGuess.length - 1].innerText = letter;
+  }
 
 
   document.addEventListener('keydown', function handleKeyPress(event) {

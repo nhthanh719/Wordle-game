@@ -69,6 +69,7 @@ header {
 
 .loader {
   position: absolute;
+  top: 18%;
   right: 49%;
   font-size: 30px;
   animation: scale 1.5s linear infinite;

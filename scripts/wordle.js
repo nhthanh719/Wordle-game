@@ -34,17 +34,24 @@ const init = async () => {
     guessParts = currentGuess.split("");
     
     const map = makeMap(wordParts);
-    console.log(map);
 
-    // TODO: mark each letter "correct", "close" or "invalid"
+    // Mark each letter "correct", "close" or "wrong"
     for (let i = 0; i < ANSWER_LENGTH; i++) {
       //correct
       if (guessParts[i] === wordParts[i]) {
         letters[ANSWER_LENGTH * currentRow + i].classList.add("correct");
+        map[guessParts[i]]--;
+      }
+    }
+    for (let i = 0; i < ANSWER_LENGTH; i++) {
+      //correct
+      if (guessParts[i] === wordParts[i]) {
+        //do nothing cause already did above
       }
       //close
-      else if (wordParts.includes(guessParts[i])) {
+      else if (wordParts.includes(guessParts[i]) && map[guessParts[i]] > 0) {
         letters[ANSWER_LENGTH * currentRow + i].classList.add("close");
+        map[guessParts[i]]--; 
       } 
       //invalid
       else {

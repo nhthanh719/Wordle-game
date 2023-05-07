@@ -33,6 +33,9 @@ const init = async () => {
     
     guessParts = currentGuess.split("");
     
+    const map = makeMap(wordParts);
+    console.log(map);
+
     // TODO: mark each letter "correct", "close" or "invalid"
     for (let i = 0; i < ANSWER_LENGTH; i++) {
       //correct
@@ -41,7 +44,7 @@ const init = async () => {
       }
       //close
       else if (wordParts.includes(guessParts[i])) {
-        letters[ANSWER_LENGTH * currentRow + i].classList.add("close"); 
+        letters[ANSWER_LENGTH * currentRow + i].classList.add("close");
       } 
       //invalid
       else {
@@ -88,5 +91,17 @@ const isLetter = (letter) => {
 const setLoading = (isLoading) => {
   loadingDiv.classList.toggle("show", isLoading);
 };
+
+const makeMap = (array) => {
+  let obj = {};
+  for (let i = 0; i < array.length; i++) {
+    const letter = array[i];
+    if (obj[letter]) {
+      obj[letter]++;
+    } else {
+      obj[letter] = 1;
+    }
+  } return obj;
+}
 
 init();

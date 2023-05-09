@@ -33,6 +33,10 @@ const init = async () => {
         return;
       }
 
+      validateWord(currentGuess);
+
+      
+
       guessParts = currentGuess.split("");
       const map = makeMap(wordParts);
 
@@ -106,6 +110,23 @@ const init = async () => {
 
 const isLetter = (letter) => {
   return /^[a-zA-Z]$/.test(letter);
+};
+
+const validateWord = async (guessWord) => {
+  setLoading(true);
+  const res = await fetch("https://words.dev-apis.com/validate-word", {
+    method: "POST",
+    body: JSON.stringify({ word: guessWord }),
+  });
+  const resObj = await res.json();
+  const { validWord } = resObj;
+
+  setLoading(false);
+
+  if (!validWord) {
+    markInvalid();
+    return;
+  }
 };
 
 const setLoading = (isLoading) => {

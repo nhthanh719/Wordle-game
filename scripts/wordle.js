@@ -1,16 +1,18 @@
 const letters = document.querySelectorAll(".score-board-letter");
 const loadingDiv = document.querySelector(".loader");
 const ANSWER_LENGTH = 5;
-
+const ROUNDS = 6;
 const init = async () => {
   let currentGuess = "";
   let currentRow = 0;
+  let done = false;
 
   //get the word of the day
   const res = await fetch("https://words.dev-apis.com/word-of-the-day");
   const resObj = await res.json();
   const word = resObj.word.toUpperCase();
   const wordParts = word.split("");
+
   setLoading(false);
 
   const addLetter = (letter) => {
@@ -27,45 +29,55 @@ const init = async () => {
   };
 
   const submit = async () => {
-    if (currentGuess.length !== ANSWER_LENGTH) {
-      return;
-    }
-    
-    guessParts = currentGuess.split("");
-    
-    const map = makeMap(wordParts);
-
-    // Mark each letter "correct", "close" or "wrong"
-    for (let i = 0; i < ANSWER_LENGTH; i++) {
-      //correct
-      if (guessParts[i] === wordParts[i]) {
-        letters[ANSWER_LENGTH * currentRow + i].classList.add("correct");
-        map[guessParts[i]]--;
+      if (currentGuess.length !== ANSWER_LENGTH) {
+        return;
       }
-    }
-    for (let i = 0; i < ANSWER_LENGTH; i++) {
-      //correct
-      if (guessParts[i] === wordParts[i]) {
-        //do nothing cause already did above
+
+      guessParts = currentGuess.split("");
+      const map = makeMap(wordParts);
+
+      // Mark each letter "correct", "close" or "wrong"
+      for (let i = 0; i < ANSWER_LENGTH; i++) {
+        //correct
+        if (guessParts[i] === wordParts[i]) {
+          letters[ANSWER_LENGTH * currentRow + i].classList.add("correct");
+          map[guessParts[i]]--;
+        }
       }
-      //close
-      else if (wordParts.includes(guessParts[i]) && map[guessParts[i]] > 0) {
-        letters[ANSWER_LENGTH * currentRow + i].classList.add("close");
-        map[guessParts[i]]--; 
-      } 
-      //invalid
-      else {
-        letters[ANSWER_LENGTH * currentRow + i].classList.add("wrong"); 
+      for (let i = 0; i < ANSWER_LENGTH; i++) {
+        //correct
+        if (guessParts[i] === wordParts[i]) {
+          //do nothing cause already did above
+        }
+        //close
+        else if (wordParts.includes(guessParts[i]) && map[guessParts[i]] > 0) {
+          letters[ANSWER_LENGTH * currentRow + i].classList.add("close");
+          map[guessParts[i]]--;
+        }
+        //invalid
+        else {
+          letters[ANSWER_LENGTH * currentRow + i].classList.add("wrong");
+        }
       }
-    }
-    // TODO: validate word
+      // TODO: validate word
 
+      //If win
+      if (currentGuess === word) {
+        window.alert("Congratulations");
+        done = true;
+      }
 
-    //TODO: check if the user wins or loses
+      //Go to next row & erase currentGuess
+      currentRow++;
+      currentGuess = "";
 
-    currentRow++;
-    currentGuess = "";
-  };
+      //If lose
+      if (currentRow === ROUNDS) {
+        alert("You suck, sorry mate");
+        done = true;
+      }
+    };
+  
 
   const backspace = () => {
     // remove last letter from current guess
@@ -77,8 +89,9 @@ const init = async () => {
     "keydown",
     (handleKeyPress = (event) => {
       const action = event.key;
-
-      if (action === "Enter") {
+      if (done === true) {
+        // do nothing
+      } else if (action === "Enter") {
         submit();
       } else if (action === "Backspace") {
         backspace();
@@ -108,7 +121,8 @@ const makeMap = (array) => {
     } else {
       obj[letter] = 1;
     }
-  } return obj;
-}
+  }
+  return obj;
+};
 
 init();

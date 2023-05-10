@@ -100,6 +100,18 @@ const init = async () => {
     letters[ANSWER_LENGTH * currentRow + currentGuess.length].innerText = "";
   };
 
+  const markInvalid = () => {
+    // alert("Not a valid word");
+    for (let i = 0; i < ANSWER_LENGTH; i++) {
+      console.log("Current letter is" + letters[i]);
+      letters[ANSWER_LENGTH * currentRow + i].classList.remove("invalid");
+      
+      setTimeout(() => {
+        letters[ANSWER_LENGTH * currentRow + i].classList.add("invalid");
+      }, 10)
+    }
+  };
+
   document.addEventListener(
     "keydown",
     (handleKeyPress = (event) => {
@@ -121,14 +133,6 @@ const init = async () => {
 
 const isLetter = (letter) => {
   return /^[a-zA-Z]$/.test(letter);
-};
-
-const markInvalid = () => {
-  // alert("Not a valid word");
-  for (let i = 0; i < ANSWER_LENGTH; i++) {
-    console.log("Current letter is" + letters[i]);
-    letters[ANSWER_LENGTH * currentRow + i].classList.add("invalid");
-  }
 };
 
 const setLoading = (isLoading) => {

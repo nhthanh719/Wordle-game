@@ -77,22 +77,26 @@ const init = async () => {
       }
     }
 
+    //Go to next row
+    currentRow++;
+
     //If win
     if (currentGuess === word) {
       window.alert("Congratulations");
       done = true;
+      document.querySelector(".header").classList.add("winner");
+      return;
     }
-
-    //Go to next row & erase currentGuess
-    currentRow++;
-    currentGuess = "";
 
     //If lose
-    if (currentRow === ROUNDS) {
-      alert("You suck, sorry mate");
+    else if (currentRow === ROUNDS) {
+      alert("Losing in life is hard but you get a lesson, try again");
       done = true;
     }
+    //Erase currentGuess
+    currentGuess = "";
   };
+
 
   const backspace = () => {
     // remove last letter from current guess
@@ -105,10 +109,10 @@ const init = async () => {
     for (let i = 0; i < ANSWER_LENGTH; i++) {
       console.log("Current letter is" + letters[i]);
       letters[ANSWER_LENGTH * currentRow + i].classList.remove("invalid");
-      
+
       setTimeout(() => {
         letters[ANSWER_LENGTH * currentRow + i].classList.add("invalid");
-      }, 10)
+      }, 10);
     }
   };
 

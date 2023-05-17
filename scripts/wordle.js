@@ -97,7 +97,6 @@ const init = async () => {
     currentGuess = "";
   };
 
-
   const backspace = () => {
     // remove last letter from current guess
     currentGuess = currentGuess.slice(0, currentGuess.length - 1);
@@ -116,6 +115,7 @@ const init = async () => {
     }
   };
 
+  //Handle keyboard presses
   document.addEventListener(
     "keydown",
     (handleKeyPress = (event) => {

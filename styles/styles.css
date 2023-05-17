@@ -122,3 +122,15 @@ header {
   }
 }
 
+@media (max-width: 320px) {
+  .score-board {
+    padding: 1rem 1rem;
+  }
+
+  .score-board-letter {
+    height: 3rem;
+    width: 3rem;
+    font-size: 3rem;
+  }
+}
+  
